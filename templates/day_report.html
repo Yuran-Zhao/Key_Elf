@@ -1,0 +1,76 @@
+<!DOCTYPE html> 
+<html lang = "en" class = "analysis">
+    <head>
+        <!-- meta 内容， 限定编码方式 -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- <meta name="applicable-device" content="mobile"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <link rel="shortcut icon" href="{{ url_for('static', filename='SPACESHIP.ico') }}">
+
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='main.css') }}">
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='vector.css') }}">
+
+        <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+        <script src="{{ url_for('static', filename='echarts.min.js') }}"></script>
+    </head>
+
+    <body background="{{ url_for('static', filename='leaves-pattern.png') }}">
+        <div class="paras_love" style="position:absolute; left:175px; top:60px; font-size:23px;">
+            <p class="para f-animLineUp" style="transition-delay: 0.2s;">属于你的历史记录
+        </div>
+        
+        <div class="day_pic" id="day_pic" style="width:600px; height:400px; position: absolute; left: 450px; top:100px"></div>
+
+        <script type="text/javascript">
+            var day_pic = echarts.init(document.getElementById('day_pic'));
+            day_pic.setOption({
+                color:['#60acfc'],
+                title:{
+                    text: '按键历史'
+                },
+                tooltip: {},
+                legend:{
+                    data: ['按键次数'],
+                },
+                xAxis: {
+                    type: 'category',
+                    data: []
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    name: '按键次数',
+                    data: [],
+                    type: 'line',
+                    smooth: true,
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                color: '#60acfc'
+                            }
+                        }
+                    }
+                }]
+            });
+            day_pic.showLoading();
+
+            $.get('/day_report_pic').done(function (result){
+                day_pic.hideLoading();
+                day_pic.setOption({
+                    xAxis:{
+                        data: result.date
+                    },
+                    series:{
+                        name: '按键次数',
+                        data: result.counts
+                    }
+                });
+            });
+        </script>
+
+        <a class="enter" href="night_report">…</a>
+    </body>
+</html>

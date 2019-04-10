@@ -1,0 +1,79 @@
+<!DOCTYPE html> 
+<html lang = "en" class = "analysis">
+    <head>
+        <!-- meta 内容， 限定编码方式 -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <link rel="shortcut icon" href="{{ url_for('static', filename='SPACESHIP.ico') }}">
+
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='main.css') }}">
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='vector.css') }}">
+        
+        <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+        <script src="{{ url_for('static', filename='echarts.min.js') }}"></script>
+    </head>
+
+    <!-- onclick=javascript:location.href='./top_10.html' -->
+    <body background="{{ url_for('static', filename='leaves-pattern.png') }}">
+        <div class="paras">
+            <p class="para f-animLineUp" style="transition-delay: 0.2s;">在过去的
+                <em class="s-fcRed f-fw1">{{ time }}</em>小时里</p>
+            <p class="para f-animLineUp" style="transition-delay: 0.3s;">你在各种场合一共敲击了
+                <em class="s-fcRed f-fw1">{{ num }}</em>次键盘</p>
+            <p class="para f-animLineUp" style="transition-delay: 0.4s;">&nbsp;</p>
+            
+            <p style="transition-delay: 0.5s;">你热衷按下
+                <em class="s-fcRed f-fw1">{{ key }} </em>键</p>
+            <p class="para f-animLineUp" style="transition-delay: 0.6s;">喜欢在
+                <em class="s-fcRed f-fw1">{{ period_begin }}:00 - {{ period_end }}:00 </em>坐在电脑前，与键盘为伴</p>
+            <p class="para f-animLineUp" style="transition-delay: 0.7s;">&nbsp;</p>
+
+            <div>
+                <p class="para f-animLineUp" style="transition-delay: 0.8s;">你习惯
+                    <em class="s-fcRed">默默 </em>敲代码</p>
+                <p class="para f-animLineUp" style="transition-delay: 0.9s;">却很少有机会出去走走</p></div>
+            </div>
+        </div>
+        <div class="hour_pic" id="hour_pic" style="width:500px; height:400px; position: absolute; left: 600px; top:75px"></div>
+        
+        <script type="text/javascript">
+            var hour_pic = echarts.init(document.getElementById('hour_pic'));
+            hour_pic.setOption({
+                color: '#ff7c7c',
+                title:{
+                    text:'各时间段按键次数'
+                },
+                tooltip:{},
+                legend:{
+                    data:['按键次数']
+                },
+                xAxis:{
+                    data:[]
+                },
+                yAxis:{},
+                series:{
+                    name:'按键次数',
+                    type:'bar',
+                    data:[]
+                }
+            });
+            hour_pic.showLoading();
+
+            $.get('/hours_pic').done(function (result){
+                hour_pic.hideLoading();
+                hour_pic.setOption({
+                    xAxis:{
+                        data: result.hours
+                    },
+                    series:{
+                        name:'按键次数',
+                        data: result.counts
+                    }
+                });
+            });
+        </script>
+        <a class="enter" href="top_10">…</a> 
+    </body>
+</html>

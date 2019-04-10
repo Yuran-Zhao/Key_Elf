@@ -1,0 +1,26 @@
+<!DOCTYPE html> 
+<html lang = "en" class = "analysis">
+    <head>
+        <!-- meta 内容， 限定编码方式 -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <link rel="shortcut icon" href="{{ url_for('static', filename='SPACESHIP.ico') }}">
+
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='main.css') }}">
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='vector.css') }}">
+        
+        <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+        <script src="{{ url_for('static', filename='echarts.min.js') }}"></script>
+    </head>
+
+    <body background="{{ url_for('static', filename='leaves-pattern.png') }}">
+        <div class="paras_love" style="position:absolute; left:175px; top:40px; font-size:23px;">
+            <p class="para f-animLineUp" style="transition-delay: 0.2s;">好像还没有数据噢</p>
+            <p class="para f-animLineUp" >&nbsp;</p>
+            <p class="para f-animLineUp" style="transition-delay: 0.2s;">不如先去试试按键再来这里吧！</p>
+            <img class="spaceship" src="{{ url_for('static', filename='SPACESHIP.png')}}" style="width: 100px; height:100px; position: absolute; top: 75px; left:350px;">
+        </div>
+    </body>
+</html>

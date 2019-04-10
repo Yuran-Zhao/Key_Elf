@@ -1,0 +1,103 @@
+<!DOCTYPE html> 
+<html lang = "en" class = "analysis">
+    <head>
+        <!-- meta 内容， 限定编码方式 -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- <meta name="applicable-device" content="mobile"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <link rel="shortcut icon" href="{{ url_for('static', filename='SPACESHIP.ico') }}">
+
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='main.css') }}">
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='vector.css') }}">
+
+        <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+        <script src="{{ url_for('static', filename='echarts.min.js') }}"></script>
+    </head>
+
+    <body background="{{ url_for('static', filename='leaves-pattern.png') }}">
+        <div class="paras_love" style="position:absolute; left:175px; top:40px; font-size:23px;">
+            <p class="para f-animLineUp" style="transition-delay: 0.2s;">这些是你最爱的按键
+        </div>
+
+        <div id="top10_pic" style="width: 650px; height: 400px; position: relative; left: 500px; top:50px"></div>
+        <script type="text/javascript">
+            var top10_pic = echarts.init(document.getElementById('top10_pic'));
+            top10_pic.setOption({
+                color: ['#a8d8ea','#aa96da','#fcbad3','#ffffd2', '#dbe2ef',
+                        '#a8e6cf','#ffe2e2','#e0f9b5','#769fcd','#3f72af',
+                        '#52616b', ],
+                title : {
+                    text: 'TOP 10 Pressed Keys',
+                    x:'center'
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data:[]
+                },
+                toolbox: {
+                    show: false
+                },
+                calculable:true,
+                series : [
+                    {
+                        name:'TOP 10 Keys',
+                        type:'pie',
+                        radius :  '55%',
+                        center : ['50%', '60%'],
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        },
+                        data:[]
+                    }
+                ]
+            });
+            top10_pic.showLoading();
+            var key = [];
+            var para = [];
+            $.ajax({
+                type: 'GET',
+                async: true,
+                url: "http://127.0.0.1:5000/top_10_pic",
+                dataType: "json",
+
+                success: function(result){
+                    top10_pic.hideLoading();
+                    top10_pic.setOption({
+                        legend:{
+                            data: result.key
+                        },
+                        series:[{
+                            data: (function(){
+                                var rs = [];
+                                for (var i = 0; i < result.key.length; i ++){
+                                    rs.push({
+                                        value: result.count[i],
+                                        name: result.key[i]
+                                    });
+                                }
+                                return rs;
+                            })()
+                        }]
+                    });
+                },
+                error: function(errorMsg){
+                    alert("图标请求数据失败!");
+                    top10_pic.hideLoading();
+                }
+            });
+        </script>
+        
+        <a class="enter" href="day_report">…</a>
+    </body>
+</html>

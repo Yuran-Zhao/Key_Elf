@@ -1,0 +1,29 @@
+<!DOCTYPE html> 
+<html lang = "en" class = "analysis">
+    <head>
+        <!-- meta 内容， 限定编码方式 -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <link rel="shortcut icon" href="{{ url_for('static', filename='SPACESHIP.ico') }}">
+
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='main.css') }}">
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='vector.css') }}">
+    </head>
+<!-- onclick=javascript:location.href='./statistic.html' -->
+    <body background="{{ url_for('static', filename='leaves-pattern.png') }}">
+        <div id="intro" class="introduction">
+            <div style="height:400px; -webkit-writing-mode: vertical-rl; writing-mode: vertical-rl; font-family: STFangsong;color: #032533; position: absolute; top:10%; right: 20%">
+                <p id="big_one" style="letter-spacing:.2em;font-size:30px;">按键精灵</p>
+                <p id="small_one" style="letter-spacing:.3em;font-size:15px;">属于你的按键记录报告</p>
+            </div>
+        </div>
+        <!-- <div style="height:100px; width:200px; font-family: HanHei SC,PingFang SC,Helvetica Neue,Helvetica,sans-serif; position:absolute; top:15%; left:25%">
+            <p style="font-size: 17px">不论何时</p>
+            <p style="font-size: 17px">都有我陪着你</p>
+            <img style="height:200px; width:200px; position: relative; top: 50px; left: 200px" src="{{ url_for('static', filename='SPACESHIP.png') }}">
+        </div> -->
+        <a class="enter" href="main_report">Enter</a>
+    </body>
+</html>

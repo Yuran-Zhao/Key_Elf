@@ -1,0 +1,36 @@
+<!DOCTYPE html> 
+<html lang = "en" class = "analysis">
+    <head>
+        <!-- meta 内容， 限定编码方式 -->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- <meta name="applicable-device" content="mobile"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <link rel="shortcut icon" href="{{ url_for('static', filename='SPACESHIP.ico') }}">
+
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='main.css') }}">
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='vector.css') }}">
+    </head>
+
+    <body background="{{ url_for('static', filename='leaves-pattern.png') }}">
+        <div class="paras">
+            <p class="para f-animLineUp" >
+                <em class="s-fcRed">{{ date }}</em></p>
+            <p class="para f-animLineUp" >这一天你睡得很晚</p>
+            <p class="para f-animLineUp" >
+              <em class="s-fcRed">{{ time }}</em>还坐在电脑前，与键盘为伴</p>
+            <p class="para f-animLineUp" >&nbsp;</p>
+
+            <p class="para f-animLineUp" >这一年，你有
+                <span class="s-fcRed">{{ num }}</span>天</p>
+            <p class="para f-animLineUp" >深夜
+                <span class="s-fcRed">12点</span>后</p>
+            <p class="para f-animLineUp" >仍沉浸在电脑世界</p>
+            <p class="para f-animLineUp" >睡不着的夜晚</p>
+            <p class="para f-animLineUp" >还有按键精灵陪伴着你</p>
+        </div>
+        <img class="spaceship" src="{{ url_for('static', filename='SPACESHIP.png')}}" style="width: 120px; height:120px; position: absolute; bottom: 15%; left:37%">
+        <!-- <a class="enter" href="./same_key.html">…</a> -->
+    </body>
+</html>
